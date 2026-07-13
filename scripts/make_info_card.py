@@ -12,7 +12,7 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "info-card.svg")
-STATIC = bool(os.environ.get("STATIC"))
+STATIC = True  # GitHub's Camo proxy strips CSS animations; always render static
 
 W, H = 480, 440
 PAD = 20
@@ -49,7 +49,7 @@ ROWS = [
     ("host",),
     ("kv", "Name", "Mohan Sharma"),
     ("kv", "Role", "Data Science Intern @ Hackveda Solutions"),
-    ("kv", "Edu", "B.Tech CSE (Data Science), CMR Univ  CGPA 9.0"),
+    ("kv", "Edu", "B.Tech CSE (Data Science), CMR Univ - CGPA 9.0"),
     ("gap",),
     ("sec", "Stack"),
     ("kv", "Languages", "Python, SQL, C/C++ (basics), HTML/CSS"),
@@ -151,6 +151,6 @@ if css_rules and not STATIC:
 
 parts.append("</svg>")
 svg = "".join(parts)
-with open(OUT, "w") as f:
+with open(OUT, "w", encoding="utf-8") as f:
     f.write(svg)
 print("wrote", OUT, len(svg), "bytes;", W, "x", H, "content_bottom", round(y))

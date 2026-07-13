@@ -9,7 +9,7 @@
 
 # Mohan Sharma
 
-**Data Science Intern · ML Engineer · Full-Stack Developer**
+**Aspiring Data Analyst · Data Science Intern · ML Enthusiast**
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-vercel-0d1117?style=for-the-badge&logo=vercel&logoColor=white)](https://personal-portfolio-opal-five-93.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mohan--sharma13-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohan-sharma13)
