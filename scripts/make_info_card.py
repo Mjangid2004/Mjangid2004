@@ -48,23 +48,24 @@ HOST = "Mjangid2004"   # shown as  Mjangid2004@github  in the header
 ROWS = [
     ("host",),
     ("kv", "Name", "Mohan Sharma"),
-    ("kv", "Role", "Full-Stack Developer · ML Enthusiast"),
-    ("kv", "Edu", "B.Tech, Computer Science"),
+    ("kv", "Role", "Data Science Intern @ Hackveda Solutions"),
+    ("kv", "Edu", "B.Tech CSE (Data Science), CMR Univ  CGPA 9.0"),
     ("gap",),
     ("sec", "Stack"),
-    ("kv", "Frontend", "React, Next.js, TypeScript, Tailwind"),
-    ("kv", "Backend", "Node.js, Django, REST APIs"),
-    ("kv", "AI / ML", "Scikit-learn, Pandas, NumPy"),
-    ("kv", "Cloud", "Vercel, GitHub Actions, Docker"),
+    ("kv", "Languages", "Python, SQL, C/C++ (basics), HTML/CSS"),
+    ("kv", "ML / AI", "Scikit-learn, Pandas, NumPy, Matplotlib"),
+    ("kv", "Backend", "Django, REST APIs, Socket Programming"),
+    ("kv", "Tools", "Power BI, Git, USDA API, YouTube API"),
     ("gap",),
     ("sec", "Projects"),
-    ("bul", "ML algorithms: Linear/Logistic Reg, DT, RF, K-Means"),
-    ("bul", "Foodie Calorie Finder — Django calorie lookup app"),
-    ("bul", "MforMusic — TypeScript music platform"),
+    ("bul", "Foodie Calorie Finder — Django + USDA API nutrition tracker"),
+    ("bul", "Water Footprint Estimator — Linear Regression + Matplotlib"),
+    ("bul", "Desi Beats — ad-free music streaming via YouTube API"),
+    ("bul", "Qrio — anonymous academic Q&A platform"),
     ("gap",),
-    ("sec", "Links"),
-    ("bul", "portfolio: personal-portfolio-opal-five-93.vercel.app"),
-    ("bul", "linkedin: linkedin.com/in/mohan-sharma13"),
+    ("sec", "Highlights"),
+    ("bul", "NPTEL: Artificial Intelligence & Mobile VR certified"),
+    ("bul", "District-level Table Tennis player — 2x Silver medalist"),
 ]
 
 
@@ -73,15 +74,20 @@ def esc(s):
 
 
 def rise(inner, i):
-    """fade + slight upward slide, staggered by row index; freezes visible."""
+    """fade + slight upward slide via CSS animation (GitHub-safe)."""
     if STATIC:
         return f"<g>{inner}</g>"
     delay = 0.15 + i * 0.06
-    return (f'<g opacity="0" transform="translate(0,5)">{inner}'
-            f'<animate attributeName="opacity" from="0" to="1" begin="{delay:.2f}s" dur="0.4s" fill="freeze"/>'
-            f'<animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" '
-            f'begin="{delay:.2f}s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></g>')
+    cls = f"r{i}"
+    return f'<g class="{cls}">{inner}</g>', cls, delay
 
+
+def css_rule(cls, delay):
+    return (f".{cls}{{opacity:0;animation:rise 0.4s cubic-bezier(.2,.8,.2,1) "
+            f"{delay:.2f}s forwards;}}")
+
+
+css_rules = []
 
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
@@ -89,6 +95,7 @@ parts = [
     '<defs>'
     f'<linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">'
     f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient></defs>',
+    '<style>@keyframes rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}</style>',
     f'<rect width="{W}" height="{H}" rx="12" fill="url(#ibg)"/>',
     f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" stroke="{FRAME}"/>',
     f'<line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>',
@@ -128,8 +135,19 @@ for i, row in enumerate(ROWS):
                  f'<text x="{KEY_X+14}" y="{y:.1f}" fill="{INK}" font-size="12.5">{txt}</text>')
     else:
         continue
-    parts.append(rise(inner, i))
+    result = rise(inner, i)
+    if isinstance(result, tuple):
+        g_html, cls, delay = result
+        css_rules.append(css_rule(cls, delay))
+        parts.append(g_html)
+    else:
+        parts.append(result)
     y += LINE_H
+
+if css_rules and not STATIC:
+    # inject per-row CSS rules into the existing <style> block
+    rule_str = "".join(css_rules)
+    parts[2] = parts[2].replace("</style>", rule_str + "</style>")
 
 parts.append("</svg>")
 svg = "".join(parts)

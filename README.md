@@ -9,10 +9,11 @@
 
 # Mohan Sharma
 
-**Full-Stack Developer · ML Enthusiast · Open Source Builder**
+**Data Science Intern · ML Engineer · Full-Stack Developer**
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-personal--portfolio--opal--five--93.vercel.app-0d1117?style=for-the-badge&logo=vercel&logoColor=white)](https://personal-portfolio-opal-five-93.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-vercel-0d1117?style=for-the-badge&logo=vercel&logoColor=white)](https://personal-portfolio-opal-five-93.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mohan--sharma13-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohan-sharma13)
+[![Instagram](https://img.shields.io/badge/Instagram-YOURHANDLE-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/YOURHANDLE)
 [![GitHub](https://img.shields.io/badge/GitHub-Mjangid2004-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mjangid2004)
 
 <br>
